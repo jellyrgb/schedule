@@ -1,7 +1,18 @@
+import pip
+
+def install(package):
+    if hasattr(pip, 'main'):
+        pip.main(['install', package])
+    else:
+        pip._internal.main(['install', package])
+
+install("streamlit_calendar")
+
 import streamlit as st
 import calendar
 from datetime import datetime
 from streamlit_calendar import calendar as cal
+
 
 # 색상 매핑
 COLOR_MAP = {
