@@ -41,7 +41,7 @@ LEGEND = """
 """
 
 # 페이지 기본 설정 및 스타일
-st.set_page_config(page_title="간호사 Fancy 근무표", page_icon="🩺", layout="wide")
+st.set_page_config(page_title="근무표 생성기", page_icon="🩺", layout="wide")
 
 st.markdown("""
 <style>
