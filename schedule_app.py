@@ -139,8 +139,20 @@ st.markdown("<hr style='border: 1px solid #ddd'>", unsafe_allow_html=True)
 
 # 입력폼
 name = st.text_input("이름을 입력하세요:")
-month = st.number_input("몇 월 근무표인가요?", min_value=1, max_value=12, value=datetime.now().month)
-year = st.number_input("몇 년도 근무표인가요?", min_value=2020, max_value=2100, value=datetime.now().year)
+
+# 년도와 월을 selectbox로 선택
+col1, col2 = st.columns(2)
+with col1:
+    year = st.selectbox("년도를 선택하세요:", 
+                       options=list(range(2020, 2101)), 
+                       index=list(range(2020, 2101)).index(datetime.now().year))
+with col2:
+    month_names = ["1월", "2월", "3월", "4월", "5월", "6월", 
+                   "7월", "8월", "9월", "10월", "11월", "12월"]
+    month_selection = st.selectbox("월을 선택하세요:", 
+                                  options=month_names, 
+                                  index=0)
+    month = month_names.index(month_selection) + 1
 code = st.text_input("근무코드를 입력하세요 (D: Day, N: Night, E: Evening, X: Off, P: 교육)", max_chars=31)
 
 # 버튼 클릭 시 달력 생성 여부 저장할 상태 초기화
@@ -177,6 +189,7 @@ if st.session_state.show_calendar:
 
     cal_options = {
         "initialView": "dayGridMonth",
+        "initialDate": f"{year}-{month:02d}-01",
         "locale": "ko",
         "headerToolbar": {
             "left": "",
